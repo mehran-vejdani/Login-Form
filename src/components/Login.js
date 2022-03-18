@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { validate } from "./validate";
 import { notify } from "./toast";
 import styles from "./signUp.module.css";
+import { Link } from "react-router-dom";
 
 function Loging() {
   const [data, setData] = useState({
@@ -78,7 +79,7 @@ function Loging() {
         </div>
 
         <div className={styles.formButton}>
-          <a href="#">SignUp</a>
+          <Link to="/signup">SignUp</Link>
           <button type="submit">Login</button>
         </div>
       </form>
