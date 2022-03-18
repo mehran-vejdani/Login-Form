@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { validate } from "./validate";
+import { notify } from "./toast";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -26,9 +29,25 @@ const SignUp = () => {
     setTouched({ ...touched, [event.target.name]: true });
   };
 
+  const submitandler = (event) => {
+    event.preventDefault();
+
+    if (!Object.keys(errors).length) {
+      notify("signup ", "success");
+    } else {
+      notify("invalid", "error");
+      setTouched = {
+        name: true,
+        email: true,
+        password: true,
+        confirmPassword: true,
+        isAccepted: true,
+      };
+    }
+  };
   return (
     <>
-      <form action="">
+      <form onSubmit={submitandler}>
         <h1>SignUp</h1>
         <div>
           <label>Name</label>
@@ -96,6 +115,7 @@ const SignUp = () => {
           <button type="submit">Sign Up</button>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 };
