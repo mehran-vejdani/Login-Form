@@ -10,6 +10,7 @@ const SignUp = () => {
     isAccepted: false,
   });
   const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
   useEffect(() => {
     setErrors(validate(data));
   }, [data]);
@@ -20,8 +21,11 @@ const SignUp = () => {
     } else {
       setData({ ...data, [event.target.name]: event.target.value });
     }
-    console.log(data);
   };
+  const focusHandler = (event) => {
+    setTouched({ ...touched, [event.target.name]: true });
+  };
+
   return (
     <>
       <form action="">
@@ -33,7 +37,9 @@ const SignUp = () => {
             name="name"
             value={data.name}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.name && touched.name && <span>{errors.name}</span>}
         </div>
         <div>
           <label>Email</label>
@@ -42,7 +48,9 @@ const SignUp = () => {
             name="email"
             value={data.email}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.email && touched.email && <span>{errors.email}</span>}
         </div>
         <div>
           <label>Password</label>
@@ -51,7 +59,11 @@ const SignUp = () => {
             name="password"
             value={data.password}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.password && touched.password && (
+            <span>{errors.password}</span>
+          )}
         </div>
         <div>
           <label>Confirm Password</label>
@@ -60,7 +72,11 @@ const SignUp = () => {
             name="confirmPassword"
             value={data.confirmPassword}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.confirmPassword && touched.confirmPassword && (
+            <span>{errors.confirmPassword}</span>
+          )}
         </div>
         <div>
           <label>I accet terms of privacy policy</label>
@@ -69,7 +85,11 @@ const SignUp = () => {
             name="isAccepted"
             value={data.isAccepted}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.isAccepted && touched.isAccepted && (
+            <span>{errors.isAccepted}</span>
+          )}
         </div>
         <div>
           <a href="#">Login</a>
